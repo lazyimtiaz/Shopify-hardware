@@ -1,0 +1,48 @@
+{% comment %}
+  Contact page: form and embedded map for store-location integration.
+{% endcomment %}
+<section class="section-spacing">
+  <div class="page-width contact-layout">
+    <div>
+      <h1>{{ page.title | default: 'Contact Us' }}</h1>
+      <p>Need help sourcing the right part? Send us your project details and we’ll reply with practical recommendations.</p>
+
+      {% form 'contact', class: 'contact-form' %}
+        <input type="text" name="contact[name]" placeholder="Your name" required>
+        <input type="email" name="contact[email]" placeholder="Your email" required>
+        <input type="text" name="contact[phone]" placeholder="Phone number">
+        <textarea name="contact[body]" rows="6" placeholder="How can we help?"></textarea>
+        <button type="submit" class="button">Send message</button>
+      {% endform %}
+    </div>
+
+    <div>
+      <h2>Visit our store</h2>
+      <div class="map-embed">
+        {% if section.settings.map_embed != blank %}
+          {{ section.settings.map_embed }}
+        {% else %}
+          <iframe
+            title="Store location"
+            loading="lazy"
+            src="https://maps.google.com/maps?q=hardware%20store&t=&z=13&ie=UTF8&iwloc=&output=embed">
+          </iframe>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": [
+    {
+      "type": "html",
+      "id": "map_embed",
+      "label": "Custom map embed code"
+    }
+  ],
+  "blocks": [{"type": "@app"}]
+}
+{% endschema %}

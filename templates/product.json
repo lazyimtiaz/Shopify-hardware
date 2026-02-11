@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {
+        "heading": "Pair with these proven essentials"
+      }
+    }
+  },
+  "order": ["main", "featured"]
+}

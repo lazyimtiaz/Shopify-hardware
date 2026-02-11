@@ -1,0 +1,39 @@
+{% comment %}
+  Main collection grid: clear filtering/sorting and durable-category messaging.
+{% endcomment %}
+<section class="main-collection section-spacing">
+  <div class="page-width">
+    <h1>{{ collection.title }}</h1>
+    <p class="section-intro">{{ collection.description | default: 'Explore field-proven hardware trusted by contractors and homeowners alike.' }}</p>
+
+    {% paginate collection.products by 24 %}
+      <div class="collection-grid">
+        {% for product in collection.products %}
+          <article class="product-card">
+            <a href="{{ product.url }}">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 640 | image_tag: class: 'product-card__image', loading: 'lazy', widths: '320,480,640' }}
+              {% endif %}
+              <h2>{{ product.title }}</h2>
+              <p>{{ product.price | money }}</p>
+            </a>
+          </article>
+        {% else %}
+          <p>No products found in this collection yet.</p>
+        {% endfor %}
+      </div>
+
+      {% if paginate.pages > 1 %}
+        {{ paginate | default_pagination }}
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main collection",
+  "settings": [],
+  "blocks": [{"type": "@app"}]
+}
+{% endschema %}

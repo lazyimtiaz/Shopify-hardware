@@ -1,0 +1,44 @@
+{% comment %}
+  Main product section: clean product details, sticky add-to-cart area on larger screens.
+{% endcomment %}
+<section class="main-product section-spacing">
+  <div class="page-width product-layout">
+    <div>
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 900 | image_tag: class: 'main-product__image', widths: '500,700,900' }}
+      {% endif %}
+    </div>
+    <div class="product-layout__content">
+      <p class="eyebrow">Built for reliable performance</p>
+      <h1>{{ product.title }}</h1>
+      <p class="price">{{ product.price | money }}</p>
+      <div class="rte">{{ product.description }}</div>
+
+      {% form 'product', product %}
+        <select name="id" class="product-select">
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+              {{ variant.title }} - {{ variant.price | money }}
+            </option>
+          {% endfor %}
+        </select>
+        <button class="button" type="submit" {% unless product.available %}disabled{% endunless %}>
+          {% if product.available %}Add to cart{% else %}Sold out{% endif %}
+        </button>
+      {% endform %}
+
+      <ul class="trust-badges">
+        <li>🛠️ Job-site tested quality</li>
+        <li>📦 Fast fulfillment from local stock</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "blocks": [{"type": "@app"}],
+  "settings": []
+}
+{% endschema %}

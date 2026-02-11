@@ -1,0 +1,56 @@
+{% comment %}
+  Featured collections/products carousel: highlights durable categories and trusted brands.
+{% endcomment %}
+<section class="featured-products section-spacing" data-carousel>
+  <div class="page-width">
+    <div class="section-heading-row">
+      <h2>{{ section.settings.heading }}</h2>
+      <a href="{{ section.settings.collection.url }}" class="text-link">View collection</a>
+    </div>
+
+    <p class="section-intro">{{ section.settings.collection_description }}</p>
+
+    <div class="carousel-track" data-carousel-track>
+      {% assign featured_collection = section.settings.collection %}
+      {% if featured_collection != blank %}
+        {% for product in featured_collection.products limit: section.settings.products_to_show %}
+          <article class="product-card">
+            <a href="{{ product.url }}">
+              {% if product.featured_image %}
+                {{ product.featured_image | image_url: width: 640 | image_tag: class: 'product-card__image', loading: 'lazy', widths: '320,480,640' }}
+              {% endif %}
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.price | money }}</p>
+            </a>
+          </article>
+        {% endfor %}
+      {% else %}
+        {% for i in (1..4) %}
+          <article class="product-card placeholder">
+            <h3>Featured hardware {{ i }}</h3>
+            <p>Set a collection to populate products.</p>
+          </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="carousel-controls">
+      <button class="icon-button" data-carousel-prev aria-label="Previous">←</button>
+      <button class="icon-button" data-carousel-next aria-label="Next">→</button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Contractor-trusted essentials"},
+    {"type": "collection", "id": "collection", "label": "Collection"},
+    {"type": "textarea", "id": "collection_description", "label": "Collection description", "default": "Industrial-grade fasteners, precision hand tools, and weather-resistant fittings selected for longevity."},
+    {"type": "range", "id": "products_to_show", "label": "Products to show", "min": 4, "max": 12, "step": 1, "default": 8}
+  ],
+  "blocks": [{"type": "@app"}],
+  "presets": [{"name": "Featured products"}]
+}
+{% endschema %}

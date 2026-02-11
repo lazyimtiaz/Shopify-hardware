@@ -1,0 +1,38 @@
+{% comment %}
+  Testimonials section: social proof from community contractors and homeowners.
+{% endcomment %}
+<section class="testimonials section-spacing">
+  <div class="page-width">
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="testimonial-grid">
+      {% for block in section.blocks %}
+        <blockquote class="testimonial-card" {{ block.shopify_attributes }}>
+          <p>“{{ block.settings.quote }}”</p>
+          <cite>— {{ block.settings.author }}</cite>
+        </blockquote>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "max_blocks": 6,
+  "settings": [
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Trusted by local trades and families"}
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {"type": "textarea", "id": "quote", "label": "Quote", "default": "Their advice is always honest and their materials are built to last."},
+        {"type": "text", "id": "author", "label": "Author", "default": "Jamie, General Contractor"}
+      ]
+    },
+    {"type": "@app"}
+  ],
+  "presets": [{"name": "Testimonials", "blocks": [{"type": "testimonial"}, {"type": "testimonial"}, {"type": "testimonial"}]}]
+}
+{% endschema %}

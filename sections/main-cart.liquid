@@ -1,0 +1,47 @@
+{% comment %}
+  Main cart section: concise summary for quick checkout flow.
+{% endcomment %}
+<section class="main-cart section-spacing">
+  <div class="page-width">
+    <h1>Your Cart</h1>
+
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <table class="cart-table">
+          <thead>
+            <tr><th>Item</th><th>Quantity</th><th>Total</th></tr>
+          </thead>
+          <tbody>
+            {% for item in cart.items %}
+              <tr>
+                <td>
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                  <p>{{ item.final_price | money }}</p>
+                </td>
+                <td>
+                  <input type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+                </td>
+                <td>{{ item.final_line_price | money }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="cart-actions">
+          <button class="button button--secondary" type="submit">Update cart</button>
+          <button class="button" type="submit" name="checkout">Checkout</button>
+        </div>
+      </form>
+    {% else %}
+      <p>Your cart is currently empty. Let’s fix that.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="button">Browse products</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": [],
+  "blocks": [{"type": "@app"}]
+}
+{% endschema %}

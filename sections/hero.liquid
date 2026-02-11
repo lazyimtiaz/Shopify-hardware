@@ -1,0 +1,53 @@
+{% comment %}
+  Homepage hero: communicates longevity/durability with earthy palette and strong copy.
+{% endcomment %}
+<section class="hero" style="--hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};">
+  {% if section.settings.background_image != blank %}
+    {{ section.settings.background_image | image_url: width: 2000 | image_tag: class: 'hero__bg', loading: 'lazy', widths: '750,1100,1500,2000' }}
+  {% endif %}
+  <div class="hero__content page-width">
+    <p class="hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <p class="hero__subheading">{{ section.settings.subheading }}</p>
+    <div class="hero__actions">
+      <a class="button" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>
+      <a class="button button--secondary" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
+    </div>
+    <ul class="hero__trust-list">
+      {% for block in section.blocks %}
+        <li {{ block.shopify_attributes }}>✔ {{ block.settings.line }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "max_blocks": 4,
+  "settings": [
+    {"type": "image_picker", "id": "background_image", "label": "Background image"},
+    {"type": "range", "id": "overlay_opacity", "label": "Overlay opacity", "min": 0, "max": 80, "step": 5, "default": 35},
+    {"type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Family-owned since 1991"},
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Hardware built for decades, not seasons."},
+    {"type": "textarea", "id": "subheading", "label": "Subheading", "default": "From structural fasteners to daily-use tools, we stock trusted products local contractors and homeowners depend on."},
+    {"type": "text", "id": "primary_label", "label": "Primary button label", "default": "Shop all hardware"},
+    {"type": "url", "id": "primary_link", "label": "Primary button link"},
+    {"type": "text", "id": "secondary_label", "label": "Secondary button label", "default": "Visit our store"},
+    {"type": "url", "id": "secondary_link", "label": "Secondary button link"}
+  ],
+  "blocks": [
+    {
+      "type": "trust_line",
+      "name": "Trust line",
+      "settings": [
+        {"type": "text", "id": "line", "label": "Line", "default": "30+ years serving local builders"}
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [{"name": "Hero"}]
+}
+{% endschema %}
