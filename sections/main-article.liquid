@@ -1,0 +1,18 @@
+{% comment %}
+  Article template section: long-form guidance for hardware buying and care.
+{% endcomment %}
+<article class="section-spacing">
+  <div class="page-width prose">
+    <p class="eyebrow">{{ article.published_at | date: '%B %d, %Y' }}</p>
+    <h1>{{ article.title }}</h1>
+    <div class="rte">{{ article.content }}</div>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Main article",
+  "settings": [],
+  "blocks": [{"type": "@app"}]
+}
+{% endschema %}

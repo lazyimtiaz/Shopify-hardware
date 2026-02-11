@@ -1,0 +1,71 @@
+{% comment %}
+  Footer section: reinforces trust, service history, and utility links.
+{% endcomment %}
+<footer class="site-footer">
+  <div class="page-width site-footer__grid">
+    <div>
+      <h2 class="site-footer__title">{{ shop.name }}</h2>
+      <p>{{ section.settings.trust_copy }}</p>
+      <p class="site-footer__badge">🛠️ 30+ years serving local builders</p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      {% if section.settings.menu != blank %}
+        <ul class="site-footer__links">
+          {% for link in section.settings.menu.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <p>{{ section.settings.address }}</p>
+      <p><a href="tel:{{ section.settings.phone | replace: ' ', '' }}">{{ section.settings.phone }}</a></p>
+      <p><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+    </div>
+  </div>
+  <div class="site-footer__meta page-width">
+    <small>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Crafted for durability and trust.</small>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "trust_copy",
+      "label": "Trust copy",
+      "default": "Dependable hardware, expert advice, and materials selected to stand up to real-world wear."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "145 Foundry Lane, Mill Creek"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "(555) 019-2828"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "support@millcreekhardware.com"
+    }
+  ]
+}
+{% endschema %}

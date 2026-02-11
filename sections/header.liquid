@@ -1,0 +1,58 @@
+{% comment %}
+  Header section: sticky, trust-first visual language, and quick access to search/cart.
+{% endcomment %}
+<header class="site-header" data-sticky-header>
+  <div class="site-header__inner page-width">
+    <div class="site-header__brand">
+      <a href="{{ routes.root_url }}" class="site-header__logo-link">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 220 | image_tag: class: 'site-header__logo', loading: 'eager', widths: '140,180,220' }}
+        {% else %}
+          <span class="site-header__wordmark">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+      <p class="site-header__tag">Built to last, trusted for generations.</p>
+    </div>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      {% if section.settings.menu != blank %}
+        <ul class="site-nav__list">
+          {% for link in section.settings.menu.links %}
+            <li><a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </nav>
+
+    <div class="site-header__actions">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="header-search">
+        <label for="header-search" class="visually-hidden">Search</label>
+        <input id="header-search" name="q" type="search" placeholder="Search bolts, tools, fittings" class="header-search__input">
+        <button type="submit" class="icon-button" aria-label="Search">🔍</button>
+      </form>
+      <a href="{{ routes.cart_url }}" class="icon-button cart-button" aria-label="Cart">
+        🛒
+        <span class="cart-button__count">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

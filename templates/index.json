@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "trust1": {"type": "trust_line", "settings": {"line": "30+ years serving local builders"}},
+        "trust2": {"type": "trust_line", "settings": {"line": "Stock selected for durability"}},
+        "trust3": {"type": "trust_line", "settings": {"line": "Friendly guidance from experts"}}
+      },
+      "block_order": ["trust1", "trust2", "trust3"],
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "quote1": {"type": "testimonial", "settings": {"quote": "We trust their fasteners on every framing project.", "author": "Jordan, Site Foreman"}},
+        "quote2": {"type": "testimonial", "settings": {"quote": "Knowledgeable team and products that hold up over time.", "author": "Alicia, Homeowner"}},
+        "quote3": {"type": "testimonial", "settings": {"quote": "Great local service and reliable stock levels.", "author": "Sam, Property Manager"}}
+      },
+      "block_order": ["quote1", "quote2", "quote3"],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "featured", "testimonials", "newsletter"]
+}

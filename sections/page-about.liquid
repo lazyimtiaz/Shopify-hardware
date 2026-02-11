@@ -1,0 +1,20 @@
+{% comment %}
+  About page: narrative around legacy, service quality, and local trust.
+{% endcomment %}
+<section class="section-spacing">
+  <div class="page-width prose">
+    <h1>{{ page.title }}</h1>
+    <p class="section-intro">For over three decades, our team has helped local builders, farmers, and homeowners find the right hardware for jobs that need to hold up year after year.</p>
+    <p>We started as a neighborhood supply counter and grew through trust—earned by stocking reliable brands, giving straight answers, and standing behind every recommendation. Today, we combine that same hands-on expertise with online convenience, so you can source quality hardware quickly without sacrificing confidence.</p>
+    <p>Whether you’re framing a home, replacing gate hinges, or rebuilding equipment in the workshop, we’re here with products selected for real use, not short-term fixes.</p>
+    <div class="rte">{{ page.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About page",
+  "settings": [],
+  "blocks": [{"type": "@app"}]
+}
+{% endschema %}
